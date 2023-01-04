@@ -66,6 +66,7 @@ public class BoardDAO {
 				}
 			} 
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		return vo;
@@ -114,7 +115,7 @@ public class BoardDAO {
 	public void updateBoard(BoardVO vo) {
 		String imageFileName = vo.getImageFileName();
 		int bno = vo.getBno();
-		String query = "update board_tbset title=?, content=?";
+		String query = "update board_tb set title=?, content=?";
 		
 		if(imageFileName != null) {
 			query += ", imageFileName=? where bno=?";

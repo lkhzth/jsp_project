@@ -10,30 +10,30 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import common.ConnectionUtil;
-import domain.ReplyVO;
+import domain.ReserveReplyVO;
 
-public class ReplyDao {
+public class ReserveReplyDao {
 
-	private DataSource dataSource;
-	
-	public ReplyDao() {
+private DataSource dataSource;
+
+	public ReserveReplyDao() {
 		dataSource = ConnectionUtil.getDataSource();
 	}
 	
-	public List<ReplyVO> replyList(int bno) {
-		List<ReplyVO> list = new ArrayList<ReplyVO>();
-		String query = "SELECT * FROM REPLY_TB WHERE bno=?";
+	public List<ReserveReplyVO> replyList(int mno) {
+		List<ReserveReplyVO> list = new ArrayList<ReserveReplyVO>();
+		String query = "SELECT * FROM REPLY_RESERVE_TB WHERE mno=?";
 		
 		try (
 			Connection conn = dataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(query);
 		){
-			pstmt.setInt(1, bno);
+			pstmt.setInt(1, mno);
 			try(ResultSet rs = pstmt.executeQuery();) {
 				while(rs.next()) {
-					ReplyVO vo = ReplyVO.builder()
+					ReserveReplyVO vo = ReserveReplyVO.builder()
 							.rno(rs.getInt("rno"))
-							.bno(rs.getInt("bno"))
+							.mno(rs.getInt("mno"))
 							.reply(rs.getString("reply"))
 							.writer(rs.getString("writer"))
 							.replyDate(rs.getDate("replyDate"))
@@ -47,9 +47,9 @@ public class ReplyDao {
 		return list;
 	}
 	
-	public ReplyVO find(int rno) {
-		String query = "SELECT * FROM REPLY_TB WHERE rno=?";
-		ReplyVO vo = null;
+	public ReserveReplyVO find(int rno) {
+		String query = "SELECT * FROM REPLY_RESERVE_TB WHERE rno=?";
+		ReserveReplyVO vo = null;
 		
 		try (
 			Connection conn = dataSource.getConnection();
@@ -58,9 +58,9 @@ public class ReplyDao {
 			pstmt.setInt(1, rno);
 			try (ResultSet rs = pstmt.executeQuery();){
 				if(rs.next()) {
-					vo = ReplyVO.builder()
+					vo = ReserveReplyVO.builder()
 							.rno(rs.getInt("rno"))
-							.bno(rs.getInt("bno"))
+							.mno(rs.getInt("mno"))
 							.reply(rs.getString("reply"))
 							.writer(rs.getString("writer"))
 							.replyDate(rs.getDate("replyDate"))
@@ -74,22 +74,25 @@ public class ReplyDao {
 	}
 	
 	
-	public void insert(ReplyVO vo) {
-		String query = "insert into REPLY_TB(rno, bno,reply,writer) values(seq_reply.nextval,?,?,?)";
-		String query2 = "update BOARD_TB set replyCount=replyCount+1 where bno=?";
+	public void insert(ReserveReplyVO vo) {
+		//String query = "insert into REPLY_RESERVE_TB(rno, mno, reply, writer) values(reply_seq.nextval,?,?,?)";
+		//String query2 = "update REPLY_RESERVE_TB set reserveReplyCount=reserveReplyCount+1 where mno=?";
+		String query = "insert into REPLY_RESERVE_TB(rno, mno,reply,writer) values(reply_seq.nextval,?,?,?)";
+		String query2 = "update reserve_TB set reserveReplyCount=reserveReplyCount+1 where mno=?";
+		
 		
 		try (Connection conn = dataSource.getConnection();){
+			
 			try (
 					PreparedStatement pstmt = conn.prepareStatement(query);
 					PreparedStatement pstmt2 = conn.prepareStatement(query2);
 				){
 				conn.setAutoCommit(false);
-				pstmt.setInt(1, vo.getBno());
+				pstmt.setInt(1, vo.getMno());
 				pstmt.setString(2, vo.getReply());
 				pstmt.setString(3, vo.getWriter());
 				pstmt.executeUpdate();
-				
-				pstmt2.setInt(1, vo.getBno());
+				pstmt2.setInt(1, vo.getMno());
 				pstmt2.executeUpdate();
 				
 			} catch (Exception e) {
@@ -104,7 +107,7 @@ public class ReplyDao {
 	}
 	
 	public void delete(int rno) {
-		String query = "delete from REPLY_TB where rno=?";
+		String query = "delete from REPLY_RESERVE_TB where rno=?";
 		try (
 			Connection conn = dataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(query);
@@ -115,6 +118,5 @@ public class ReplyDao {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 }

@@ -47,7 +47,7 @@ public class MemberController extends HttpServlet {
 			nextPage = "joinForm";
 		} else if(pathInfo.equals("/join")) { // 회원가입 처리
 			String id = request.getParameter("id");
-			String pwd = request.getParameter("pwd");
+			String pwd = (String) request.getAttribute("pwd");
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
 			String phone = request.getParameter("phone");
@@ -59,6 +59,7 @@ public class MemberController extends HttpServlet {
 					.email(email)
 					.phone(phone).build();
 			service.memberJoin(vo);
+			
 			response.sendRedirect(contextPath + "/board"); 
 			return;
 			
@@ -70,6 +71,9 @@ public class MemberController extends HttpServlet {
 			String pwd = (String) request.getAttribute("pwd");
 			MemberVO vo = MemberVO.builder()
 					.id(id).pwd(pwd).build();
+			System.out.println(id);
+			System.out.println(pwd);
+			System.out.println(vo);
 			
 			if(service.loginService(vo)) {
 				HttpSession session = request.getSession();

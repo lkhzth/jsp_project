@@ -90,7 +90,6 @@ public class BoardController extends HttpServlet {
 			
 			if(imageFileName != null) {
 				String originFileName = req.get("originFileName");
-				
 				multiReq.uploadImage(bno, imageFileName);
 				if(originFileName != null) {
 					multiReq.deleteOriginImage(paramBno, originFileName);

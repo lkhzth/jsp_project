@@ -11,13 +11,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ReserveVO {
+public class ReserveReplyVO {
+	private int rno;
 	private int mno;
-	private String title;
-	private String content;
-	private String phone;
+	private String reply;
 	private String writer;
-	private Date writeDate;
-	private int reserveReplyCount;
+	private Date replyDate;
+	private Date modifyDate;
 	
 }

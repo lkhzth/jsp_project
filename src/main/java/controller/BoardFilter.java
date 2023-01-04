@@ -19,7 +19,7 @@ import domain.MemberVO.MemberGrade;
 @WebFilter(urlPatterns = {
 		"/board/writeForm",
 		"/board/detail",
-		"/board/adminDetail"
+		"/board/adminDetail",
 })
 public class BoardFilter extends HttpFilter implements Filter {
 

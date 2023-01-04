@@ -17,9 +17,9 @@ public class ReplyService {
 		return dao.replyList(bno);
 	}
 	
-//	public ReplyVO findList(int rno) {
-//		return dao.find(rno);
-//	}
+	public ReplyVO findList(int rno) {
+		return dao.find(rno);
+	}
 
 	public void writer(ReplyVO vo) {
 		dao.insert(vo);
