@@ -54,8 +54,10 @@ public class BoardController extends HttpServlet {
 			BoardVO findBoard = service.findBoard(bno);
 			request.setAttribute("board", findBoard);
 			nextPage = "detail";
+		
 		} else if(pathInfo.equals("/writeForm")) {
 			nextPage = "writeForm";
+		
 		} else if(pathInfo.equals("/write")) {
 			Map<String, String> req = multiReq.getMultipartRequest(request);
 			String imageFileName = req.get("imageFileName");
@@ -70,9 +72,9 @@ public class BoardController extends HttpServlet {
 			if(imageFileName != null && imageFileName.length() > 0) {
 				multiReq.uploadImage(boardNo, imageFileName);
 			}
-			
 			response.sendRedirect(contextPath + "/board");
 			return;
+
 		} else if(pathInfo.equals("/modBoard")) {
 			Map<String, String> req = multiReq.getMultipartRequest(request);
 			String paramBno = req.get("bno");
@@ -97,6 +99,7 @@ public class BoardController extends HttpServlet {
 			}
 			response.sendRedirect(contextPath + "/board");
 			return;
+			
 		} else if(pathInfo.equals("/removeBoard")) {
 			Map<String, String> req = multiReq.getMultipartRequest(request);
 			String paramBno = req.get("bno");

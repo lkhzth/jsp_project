@@ -72,9 +72,11 @@ public class ReplyController extends HttpServlet {
 			out.print(result);
 		
 		} else if(pathInfo.equals("/remove")){
+			String paramBno = request.getParameter("bno");
+			int bno = Integer.parseInt(paramBno);
 			String paramRno = request.getParameter("rno");
 			int rno = Integer.parseInt(paramRno);
-			service.remove(rno);
+			service.remove(bno, rno);
 			String result = gson.toJson("댓글 삭제 성공");
 			out.print(result);
 		
@@ -84,7 +86,6 @@ public class ReplyController extends HttpServlet {
 //			ReplyVO detail = service.findList(rno);
 //			out.print(gson.toJson(detail));
 		}
-		
 		
 		else {
 			System.out.println("잘못함");

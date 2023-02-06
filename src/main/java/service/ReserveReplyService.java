@@ -25,8 +25,8 @@ private ReserveReplyDao dao;
 		dao.insert(vo);
 	}
 
-	public void remove(int rno) {
-		dao.delete(rno);
+	public void remove(int rno, int mno) {
+		dao.delete(rno, mno);
 	}
 
 }

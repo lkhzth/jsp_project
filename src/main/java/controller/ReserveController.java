@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -59,9 +60,21 @@ public class ReserveController extends HttpServlet {
 			nextPage = "phoneCheck";
 
 		} else if(pathInfo.equals("/checking")){
-			String phone = request.getParameter("phone");
-			System.out.println(phone);
-			nextPage = "detail";
+			String paramMno = request.getParameter("mno");
+			int mno = Integer.parseInt(paramMno);
+			String paramPhoneCk = request.getParameter("phoneCk");
+			int phoneCk = Integer.parseInt(paramPhoneCk);
+			ReserveVO findBoard = service.findReserve(mno);
+			String getPhone = findBoard.getPhone();
+			int phone = Integer.parseInt(getPhone);
+			
+			if (phone == phoneCk) {
+				request.setAttribute("board", findBoard);
+				nextPage = "detail";
+			} else {
+				response.sendRedirect(contextPath + "/reserve");
+				return;
+			}
 			
 		} else if(pathInfo.equals("/detail")) {
 			String paramMno = request.getParameter("mno");
@@ -69,7 +82,6 @@ public class ReserveController extends HttpServlet {
 			ReserveVO findBoard = service.findReserve(mno);
 			request.setAttribute("board", findBoard);
 			nextPage = "detail";
-			
 		}
 		
 		else if(pathInfo.equals("/reservationForm")) {
@@ -86,16 +98,18 @@ public class ReserveController extends HttpServlet {
 			response.sendRedirect(contextPath + "/reserve");
 			return;
 		
-		}
+		} else if(pathInfo.equals("/removeBoard")) {
+			String paramMno = request.getParameter("mno");
+			int mno = Integer.parseInt(paramMno);
+			service.removeBoard(mno);
+			response.sendRedirect(contextPath + "/reserve");
+			return;
 		
-		else {
+		} else {
 			System.out.println("페이지없음");
 			return;
 		}
-	
 		rd = request.getRequestDispatcher(PREFIX + nextPage + SUFFIX);
 		rd.forward(request, response);
 	}
-		
-	
 }

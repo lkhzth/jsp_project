@@ -73,15 +73,16 @@ public class ReplyDao {
 		return vo;
 	}
 	
-	
 	public void insert(ReplyVO vo) {
 		String query = "insert into REPLY_TB(rno, bno,reply,writer) values(seq_reply.nextval,?,?,?)";
 		String query2 = "update BOARD_TB set replyCount=replyCount+1 where bno=?";
+		String query3 = "update BOARD_TB set replyCount = (select count(bno) from REPLY_TB where REPLY_TB.bno = BOARD_TB.bno)"; 
 		
 		try (Connection conn = dataSource.getConnection();){
 			try (
 					PreparedStatement pstmt = conn.prepareStatement(query);
 					PreparedStatement pstmt2 = conn.prepareStatement(query2);
+					PreparedStatement pstmt3 = conn.prepareStatement(query3);
 				){
 				conn.setAutoCommit(false);
 				pstmt.setInt(1, vo.getBno());
@@ -91,6 +92,8 @@ public class ReplyDao {
 				
 				pstmt2.setInt(1, vo.getBno());
 				pstmt2.executeUpdate();
+				
+				pstmt3.executeUpdate();
 				
 			} catch (Exception e) {
 				conn.rollback();
@@ -103,18 +106,24 @@ public class ReplyDao {
 		} 
 	}
 	
-	public void delete(int rno) {
+	public void delete(int bno, int rno) {
 		String query = "delete from REPLY_TB where rno=?";
+		String query2 = "update BOARD_TB set replyCount=replyCount-1 where bno=?";
+
 		try (
-			Connection conn = dataSource.getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(query);
-		){
+				Connection conn = dataSource.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query);
+				PreparedStatement pstmt2 = conn.prepareStatement(query2);
+			){
 			pstmt.setInt(1, rno);
 			pstmt.executeUpdate();
-		} catch (SQLException e) {
+			
+			pstmt2.setInt(1, bno);
+			pstmt2.executeUpdate();
+			
+		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 	}
-	
-	
 }

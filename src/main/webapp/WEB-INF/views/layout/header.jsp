@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
-
+<script src="${contextPath}/resources/js/common.js"></script>
 <style>
 *{font-family: 'Quicksand', sans-serif;}
 	body{
@@ -47,12 +47,29 @@
 		padding-right: 0;
     	
 	}
+	.logo-height {
+		height: 104px;
+	}
+	.logo-text {
+		color: navy;
+	    position: relative;
+	    top: -39px;
+	    text-decoration: none;
+	    font-size: 27px;
+	    font-weight: bold
+	}	
 	
 </style>
 </head>
 <body>
  
- 	<div class="text-center"><h1><a href="${contextPath}/main"><img src="${contextPath}/resources/image/logo.png"></a></h1></div>
+ 	<div class="text-center">
+ 		<h1 class="logo-height">
+ 			<a href="${contextPath}/main"><img src="${contextPath}/resources/image/logo.png"><br>
+ 				<span class="logo-text">스타디움 컨벤션 웨딩</span>
+ 			</a>
+ 		</h1>
+ 	</div>
 
 <div>
 	<nav class="navbar navbar-expand-sm navbar-dark justify-content-between">
@@ -61,16 +78,19 @@
   <!-- Links -->
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="#">Wedding Hall</a>
+      <a class="nav-link" href="http://scwedding.co.kr/view_img.html">웨딩홀</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="http://scwedding.co.kr/view_img2.html">야외웨딩홀</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="${contextPath}/reserve">예약문의</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="${contextPath}/board">방문후기</a>
+      <a class="nav-link" href="${contextPath}/board">웨딩후기</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">오시는길</a>
+      <a class="nav-link" href="http://scwedding.co.kr/location.html">오시는길</a>
     </li>
   </ul>
   

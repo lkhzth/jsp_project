@@ -4,15 +4,11 @@
 
 <div class="container">
 	<div class="text-center jumbotron bg-light">
-		<h1>이 글은 비밀글입니다. 등록하신 폰번호를 입력하세요.</h1>
+		<h3>비밀글입니다.<br>등록하신 연락처를 입력하세요.<br>(관리자는 바로 조회가능)</h3>
 	</div>
-	${board.mno}
-	${board.phone}
 	<form action="${contextPath}/reserve/checking" method="post">
-		
-		<div class="form-group">
-			휴대폰번호 : <input type="text" class="form-control" name="phone">
-		</div>
+		<input type="hidden" value="${board.mno}" name="mno">	
+		휴대폰번호 : <input type="text" name="phoneCk">
 		<button class="btn btn-primary">확인</button>
 	</form>
 </div>

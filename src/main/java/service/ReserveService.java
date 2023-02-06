@@ -28,5 +28,9 @@ public class ReserveService {
 	public boolean checkPhone(String phone) {
 		return dao.phoneCheck(phone);
 	}
+
+	public void removeBoard(int mno) {
+		dao.deleteBoard(mno);
+	}
 	
 }

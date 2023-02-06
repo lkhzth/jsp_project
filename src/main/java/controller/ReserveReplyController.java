@@ -73,9 +73,11 @@ public class ReserveReplyController extends HttpServlet {
 			out.print(result);
 			
 		} else if(pathInfo.equals("/remove")){
+			String paramMno = request.getParameter("mno");
+			int mno = Integer.parseInt(paramMno);
 			String paramRno = request.getParameter("rno");
 			int rno = Integer.parseInt(paramRno);
-			service.remove(rno);
+			service.remove(mno, rno);
 			String result = gson.toJson("댓글 삭제 성공");
 			out.print(result);
 		

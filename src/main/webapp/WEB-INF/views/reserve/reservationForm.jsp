@@ -5,12 +5,12 @@
 
 <div class="container">
 	<div class="text-center jumbotron bg-light">
-		<h1>실시간예약상담</h1>
+		<h1>글쓰기</h1>
 	</div>
 	
-	<form action="${contextPath}/reserve/write" method="post">
+	<form action="${contextPath}/reserve/write" method="post" >
 		<div class="form-group">
-			이름 : <input type="text" class="form-control" name="writer" >
+			이름 : <input type="text" class="form-control" name="writer">
 		</div>
 		<div class="form-group">
 			휴대폰 : <input type="tel" class="form-control" name="phone">

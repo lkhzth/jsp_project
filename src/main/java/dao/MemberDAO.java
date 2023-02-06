@@ -55,12 +55,10 @@ public class MemberDAO {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				
 				pstmt.executeUpdate();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		
 		return result;
 	}
 
@@ -83,5 +81,4 @@ public class MemberDAO {
 		}
 		return grade;
 	}
-
 }

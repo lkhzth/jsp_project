@@ -58,7 +58,7 @@ let replyService = {
 			data : ReserveReplyVO,
 			success : function(result){
 				alert(result);
-				replyService.list(ReserveReplyVO.mno);
+				replyService.reserveList(ReserveReplyVO.mno);
 			},
 			error : function() {
 				alert('댓글 수정 에러');
@@ -73,7 +73,7 @@ let replyService = {
 			data : ReserveReplyVO,
 			success : function(result){
 				alert(result);
-				replyService.list(ReserveReplyVO.mno);
+				replyService.reserveList(ReserveReplyVO.mno);
 			},
 			error : function() {
 				alert('댓글 삭제 에러');
@@ -95,14 +95,6 @@ function replyListRender(replyList) {
 				<span class="badge badge-info">${r.replyDate}</span>
 			</div>`
 			
-			if(r.writer==auth.id){
-				output+= `
-				<div class="align-self-content" data-rno="${r.rno}">
-					<button class="btn btn-sm btn-info reply_modBtn">수정</button>
-					<button class="btn btn-sm btn-danger reply_delBtn">삭제</button>				
-				</div>
-				`;
-			}
 			if(auth.grade == 'ROLE_ADMIN'){
 				output+= `
 				<div class="align-self-content" data-rno="${r.rno}">
@@ -110,7 +102,6 @@ function replyListRender(replyList) {
 				</div>
 				`;
 			}
-			
 	}
 	output += `</li>`;
 	$('.replyList').html(output);

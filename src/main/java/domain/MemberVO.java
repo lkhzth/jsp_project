@@ -24,6 +24,4 @@ public class MemberVO {
 	public enum MemberGrade{
 		ROLE_ADMIN, ROLE_MEMBER
 	}
-	
-	
 }

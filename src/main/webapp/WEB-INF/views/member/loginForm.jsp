@@ -7,12 +7,12 @@
 		<h1>로그인</h1>
 	</div>
 	
-	<form action="${contextPath}/member/login" method="post">
+	<form action="${contextPath}/member/login" method="post" class="text-center">
 		<div class="form-group">
-			아이디 : <input type="text" class="form-control" name="id">
+			아이디 : <input type="text" name="id">
 		</div>
 		<div class="form-group">
-			비밀번호 : <input type="password" class="form-control" name="pwd">
+			비밀번호 : <input type="password" name="pwd">
 		</div>
 		<button class="btn btn-primary">로그인</button>
 	</form>

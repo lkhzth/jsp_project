@@ -8,7 +8,7 @@
 
 <div class="container">
 	<div class="text-center jumbotron bg-light">
-		<h1>게시글조회</h1>
+		<h1>${board.bno}번 글입니다.</h1>
 	</div>
 	<form id="viewForm" enctype="multipart/form-data">
 		<table class="table">
@@ -61,7 +61,7 @@
 				</td>
 			</tr>
 			<tr class="viewMode">
-				<c:if test="${auth.id eq board.writer or auth.grade eq 'ROLE_ADMIN'}">
+				<c:if test="${auth.id eq board.writer or auth.grade eq 'ROLE_MEMBER'}">
 					<td colspan="4">
 						<button type="button" class="btn btn-info modify">수정</button>
 						<button type="button" class="btn btn-danger backViewMode">취소</button>
@@ -78,7 +78,9 @@
 				<th colspan="2">
 					<ul class="d-flex justify-content-between">
 						<li>댓글을 작성해주세요</li>
-						<li class="form-inline">작성자 : <input type="text" class="reply_writer form-control ml-2" value="${auth.id}" readonly="readonly"></li>
+						<li class="form-inline">
+							작성자 : <input type="text" class="reply_writer form-control ml-2" value="${auth.id}" readonly="readonly">
+						</li>
 					</ul>
 				</th>
 			</tr>

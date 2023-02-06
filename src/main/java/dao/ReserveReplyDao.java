@@ -75,26 +75,27 @@ private DataSource dataSource;
 	
 	
 	public void insert(ReserveReplyVO vo) {
-		//String query = "insert into REPLY_RESERVE_TB(rno, mno, reply, writer) values(reply_seq.nextval,?,?,?)";
-		//String query2 = "update REPLY_RESERVE_TB set reserveReplyCount=reserveReplyCount+1 where mno=?";
 		String query = "insert into REPLY_RESERVE_TB(rno, mno,reply,writer) values(reply_seq.nextval,?,?,?)";
 		String query2 = "update reserve_TB set reserveReplyCount=reserveReplyCount+1 where mno=?";
-		
+		String query3 = "update reserve_TB set reserveReplyCount = (select count(mno) from REPLY_RESERVE_TB where REPLY_RESERVE_TB.mno = reserve_TB.mno)";
 		
 		try (Connection conn = dataSource.getConnection();){
 			
 			try (
 					PreparedStatement pstmt = conn.prepareStatement(query);
 					PreparedStatement pstmt2 = conn.prepareStatement(query2);
+					PreparedStatement pstmt3 = conn.prepareStatement(query3);
 				){
 				conn.setAutoCommit(false);
 				pstmt.setInt(1, vo.getMno());
 				pstmt.setString(2, vo.getReply());
 				pstmt.setString(3, vo.getWriter());
 				pstmt.executeUpdate();
+				
 				pstmt2.setInt(1, vo.getMno());
 				pstmt2.executeUpdate();
 				
+				pstmt3.executeUpdate();
 			} catch (Exception e) {
 				conn.rollback();
 				e.printStackTrace();
@@ -106,17 +107,21 @@ private DataSource dataSource;
 		} 
 	}
 	
-	public void delete(int rno) {
+	public void delete(int mno, int rno) {
 		String query = "delete from REPLY_RESERVE_TB where rno=?";
+		String query2 = "update reserve_TB set reserveReplyCount=reserveReplyCount-1 where mno=?";
 		try (
 			Connection conn = dataSource.getConnection();
 			PreparedStatement pstmt = conn.prepareStatement(query);
+			PreparedStatement pstmt2 = conn.prepareStatement(query2);
 		){
 			pstmt.setInt(1, rno);
 			pstmt.executeUpdate();
+			
+			pstmt2.setInt(1, mno);
+			pstmt2.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-
 }

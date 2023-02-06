@@ -18,5 +18,6 @@ public class ReplyVO {
 	private String writer;
 	private Date replyDate;
 	private Date modifyDate;
+
 	
 }

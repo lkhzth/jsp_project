@@ -116,6 +116,17 @@ public class ReserveDAO {
 			}
 		return result;
 	}
-	
-	
+
+	public void deleteBoard(int mno) {
+		String query = "delete from reserve_TB where mno=?";
+		try (
+			Connection conn = dataSource.getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(query);
+		){
+			pstmt.setInt(1, mno);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

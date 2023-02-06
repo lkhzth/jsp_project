@@ -1,11 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 
 <div class="container">
 
-	<div class="text-center jumbotron bg-light">
-		<h1>목록</h1>
+	<div class="text-left m-5">
+		<h3>웨딩후기
+			<span style="font-size: 15px">(신랑&신부님 및 방문하신 하객분들)<br>
+				피드백 주신 분들께 소정의 상품을 드립니다.
+			</span>
+		</h3>
 	</div>
 	
 	<form id="listForm">

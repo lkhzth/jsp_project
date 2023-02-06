@@ -94,7 +94,7 @@ function replyListRender(replyList) {
 				<span class="badge badge-info">${r.replyDate}</span>
 			</div>`
 			
-			if(r.writer==auth.id){
+			if(r.writer==auth.id && auth.grade == 'ROLE_MEMBER'){
 				output+= `
 				<div class="align-self-content" data-rno="${r.rno}">
 					<button class="btn btn-sm btn-info reply_modBtn">수정</button>
@@ -105,15 +105,12 @@ function replyListRender(replyList) {
 			if(auth.grade == 'ROLE_ADMIN'){
 				output+= `
 				<div class="align-self-content" data-rno="${r.rno}">
+					<button class="btn btn-sm btn-info reply_modBtn">수정</button>
 					<button class="btn btn-sm btn-danger reply_delBtn">삭제</button>				
 				</div>
 				`;
 			}
-			
 	}
 	output += `</li>`;
 	$('.replyList').html(output);
-	
-	
-	
 }

@@ -25,8 +25,8 @@ public class ReplyService {
 		dao.insert(vo);
 	}
 
-	public void remove(int rno) {
-		dao.delete(rno);
+	public void remove(int rno, int bno) {
+		dao.delete(rno, bno);
 	}
 
 }
