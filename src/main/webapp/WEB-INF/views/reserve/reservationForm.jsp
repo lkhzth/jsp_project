@@ -7,11 +7,10 @@
 	<div class="text-center jumbotron bg-light">
 		<h1>글쓰기</h1>
 	</div>
-	
 	<form action="${contextPath}/reserve/write" method="post" >
 		<div class="form-group">
-			이름 : <input type="text" class="form-control" name="writer">
-		</div>
+			이름 : <input type="text" class="form-control" name="writer" >
+		</div>	
 		<div class="form-group">
 			휴대폰 : <input type="tel" class="form-control" name="phone">
 		</div>

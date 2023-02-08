@@ -25,13 +25,13 @@
 						<c:choose>
 							<c:when test="${auth.grade eq 'ROLE_ADMIN'}">
 								<a href="${contextPath}/reserve/detail?mno=${r.mno}" class="title">${r.title }
-								<b>${r.reserveReplyCount != 0 ? '['+=r.reserveReplyCount +=']':''}</b></a>
 							</c:when>
 							<c:otherwise>
 								<a href="${contextPath}/reserve/phChecked?mno=${r.mno}" class="title">${r.title }
 								<input type="hidden" value="${r.mno}">
 							</c:otherwise>
 						</c:choose>
+								<b>${r.reserveReplyCount != 0 ? '['+=r.reserveReplyCount +=']':''}</b></a>
 					</td>
 					<td>${r.writer }</td>
 					<td>${r.writeDate }</td>
