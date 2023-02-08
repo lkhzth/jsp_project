@@ -71,11 +71,8 @@ public class MemberController extends HttpServlet {
 			String pwd = (String) request.getAttribute("pwd");
 			MemberVO vo = MemberVO.builder()
 					.id(id).pwd(pwd).build();
-			System.out.println(id);
-			System.out.println(pwd);
-			System.out.println(vo);
-			
-			if(service.loginService(vo)) {
+
+			if(service.loginService(vo)) { // 
 				HttpSession session = request.getSession();
 				
 				// 회원권한 설정
@@ -84,7 +81,6 @@ public class MemberController extends HttpServlet {
 				authVO.setId(vo.getId()); // 아이디
 				authVO.setGrade(grade); // 등급
 				session.setAttribute("auth", authVO); // 세션데이터 바인딩
-				
 				
 				String userUri = (String) session.getAttribute("userUri");
 				if(userUri != null) {
@@ -98,6 +94,7 @@ public class MemberController extends HttpServlet {
 				System.out.println("MemberController.login : 아이디 또는 비밀번호 틀림");
 				return;
 			}
+			
 		} else if(pathInfo.equals("/logout")) { // 로그아웃 처리
 			HttpSession session = request.getSession(false);
 			session.removeAttribute("auth");

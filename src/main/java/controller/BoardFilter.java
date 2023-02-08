@@ -38,11 +38,8 @@ public class BoardFilter extends HttpFilter implements Filter {
 			return;
 		} else {
 			if(auth.getGrade()==MemberGrade.ROLE_ADMIN) {
-				
-				
 			}
 		}
 		chain.doFilter(request, response);
 	}
-
 }
